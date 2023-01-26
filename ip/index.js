@@ -1,26 +1,25 @@
 //axios import buraya gelecek
+import axios from "axios";
 
 var benimIP;
-
 
 // ------------ değiştirmeyin --------------
 // licensed to Ergineer 2022
 require("babel-core/register");
 require("babel-polyfill");
-async function ipAdresimiAl(){
-	await axios({
-		method: 'get',
-		url: 'https://apis.ergineer.com/ipadresim',
-	})
-	.then(function (response) {
-		return response.data
-	})
-	.then(function (a) {
-		benimIP=a
-	});
-}				
+async function ipAdresimiAl() {
+  await axios({
+    method: "get",
+    url: "https://apis.ergineer.com/ipadresim",
+  })
+    .then(function (response) {
+      return response.data;
+    })
+    .then(function (a) {
+      benimIP = a;
+    });
+}
 // ------------ değiştirmeyin --------------
-
 
 /*
 	ADIM 1: axios kullanarak, aşağıdaki URL'ye GET sorgusu atacağız
@@ -67,6 +66,50 @@ async function ipAdresimiAl(){
 	Örnek dinamik URL kullanımı: var url = "https://apis.ergineer.com/ipgeoapi/"+benimIP; 
 */
 
-
-
 //kodlar buraya gelecek
+
+const bilgiler = (obj) => {
+  const {
+    ülkebayrağı,
+    sorgu,
+    ülke,
+    ülkeKodu,
+    enlem,
+    boylam,
+    şehir,
+    saatdilimi,
+    parabirimi,
+    isp,
+  } = obj;
+  return `
+	<div class="card">
+	<img src=${ülkebayrağı} />
+	<div class="card-info">
+		<h3 class="ip">${sorgu}</h3>
+		<p class="ulke">${ülke} ${ülkeKodu}</p>
+		<p>Enlem: ${enlem} Boylam: ${boylam}</p>
+		<p>Şehir: ${şehir}</p>
+		<p>Saat dilimi: ${saatdilimi}</p>
+		<p>Para birimi: ${parabirimi}</p>
+		<p>ISP: ${isp}</p>
+	</div>
+    </div>`;
+};
+
+const manuelIp = () => {
+  return new Promise((resolve, reject) => {
+    resolve(`https://apis.ergineer.com/ipgeoapi/${benimIP}`);
+  });
+};
+
+ipAdresimiAl()
+  .then(manuelIp)
+  .then((ipp) => {
+    axios.get(`${ipp}`).then((response) => {
+      const bilgiObj = response.data;
+      document
+        .querySelector(".cards")
+        .insertAdjacentHTML("beforeend", bilgiler(bilgiObj));
+    });
+  })
+  .catch((err) => console.log(err));
