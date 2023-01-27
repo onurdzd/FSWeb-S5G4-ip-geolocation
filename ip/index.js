@@ -96,20 +96,37 @@ const bilgiler = (obj) => {
     </div>`;
 };
 
-const manuelIp = () => {
-  return new Promise((resolve, reject) => {
-    resolve(`https://apis.ergineer.com/ipgeoapi/${benimIP}`);
-  });
-};
+//new Promise ile yapılış
+// const manuelIp = () => {
+//   return new Promise((resolve, reject) => {
+//     resolve(`https://apis.ergineer.com/ipgeoapi/${benimIP}`);
+//   });
+// };
 
-ipAdresimiAl()
-  .then(manuelIp)
-  .then((ipp) => {
-    axios.get(`${ipp}`).then((response) => {
-      const bilgiObj = response.data;
+// ipAdresimiAl()
+//   .then(manuelIp)
+//   .then((ipp) => {
+//     axios.get(`${ipp}`).then((response) => {
+//       const bilgiObj = response.data;
+//       document
+// .querySelector(".cards")
+// .insertAdjacentHTML("beforeend", bilgiler(bilgiObj));
+//     });
+//   })
+//   .catch((err) => console.log(err));
+
+//settimeout ile yapılış
+ipAdresimiAl();
+setTimeout(() => {
+  console.log(benimIP);
+  axios
+    .get(`https://apis.ergineer.com/ipgeoapi/${benimIP}`)
+    .then((response) => {
       document
         .querySelector(".cards")
-        .insertAdjacentHTML("beforeend", bilgiler(bilgiObj));
+        .insertAdjacentHTML("beforeend", bilgiler(response.data));
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  })
-  .catch((err) => console.log(err));
+}, 1000);

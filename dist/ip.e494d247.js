@@ -13488,19 +13488,36 @@ var bilgiler = function bilgiler(obj) {
     isp = obj.isp;
   return "\n\t<div class=\"card\">\n\t<img src=".concat(ülkebayrağı, " />\n\t<div class=\"card-info\">\n\t\t<h3 class=\"ip\">").concat(sorgu, "</h3>\n\t\t<p class=\"ulke\">").concat(ülke, " ").concat(ülkeKodu, "</p>\n\t\t<p>Enlem: ").concat(enlem, " Boylam: ").concat(boylam, "</p>\n\t\t<p>\u015Eehir: ").concat(şehir, "</p>\n\t\t<p>Saat dilimi: ").concat(saatdilimi, "</p>\n\t\t<p>Para birimi: ").concat(parabirimi, "</p>\n\t\t<p>ISP: ").concat(isp, "</p>\n\t</div>\n    </div>");
 };
-var manuelIp = function manuelIp() {
-  return new Promise(function (resolve, reject) {
-    resolve("https://apis.ergineer.com/ipgeoapi/".concat(benimIP));
+
+//new Promise ile yapılış
+// const manuelIp = () => {
+//   return new Promise((resolve, reject) => {
+//     resolve(`https://apis.ergineer.com/ipgeoapi/${benimIP}`);
+//   });
+// };
+
+// ipAdresimiAl()
+//   .then(manuelIp)
+//   .then((ipp) => {
+//     axios.get(`${ipp}`).then((response) => {
+//       const bilgiObj = response.data;
+//       document
+// .querySelector(".cards")
+// .insertAdjacentHTML("beforeend", bilgiler(bilgiObj));
+//     });
+//   })
+//   .catch((err) => console.log(err));
+
+//settimeout ile yapılış
+ipAdresimiAl();
+setTimeout(function () {
+  console.log(benimIP);
+  _axios.default.get("https://apis.ergineer.com/ipgeoapi/".concat(benimIP)).then(function (response) {
+    document.querySelector(".cards").insertAdjacentHTML("beforeend", bilgiler(response.data));
+  }).catch(function (err) {
+    console.log(err);
   });
-};
-ipAdresimiAl().then(manuelIp).then(function (ipp) {
-  _axios.default.get("".concat(ipp)).then(function (response) {
-    var bilgiObj = response.data;
-    document.querySelector(".cards").insertAdjacentHTML("beforeend", bilgiler(bilgiObj));
-  });
-}).catch(function (err) {
-  return console.log(err);
-});
+}, 1000);
 },{"axios":"node_modules/axios/index.js","babel-core/register":"node_modules/babel-core/register.js","babel-polyfill":"node_modules/babel-polyfill/lib/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -13526,7 +13543,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55992" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56662" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
