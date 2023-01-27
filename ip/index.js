@@ -132,8 +132,7 @@ const bilgiler = (obj) => {
 // }, 1000);
 
 //3) direk fonsiyon ile yapılış
-
-const sonuc = async function () {
+const sonuc = async () => {
   await ipAdresimiAl(); //bunun çalışmasını bekletmek için await
   console.log(benimIP);
   await axios

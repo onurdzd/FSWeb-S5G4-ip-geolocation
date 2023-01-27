@@ -13525,7 +13525,6 @@ var bilgiler = function bilgiler(obj) {
 // }, 1000);
 
 //3) direk fonsiyon ile yapılış
-
 var sonuc = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
