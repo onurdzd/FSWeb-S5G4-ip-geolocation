@@ -86,7 +86,7 @@ const bilgiler = (obj) => {
 	<img src=${ülkebayrağı} />
 	<div class="card-info">
 		<h3 class="ip">${sorgu}</h3>
-		<p class="ulke">${ülke} ${ülkeKodu}</p>
+		<p class="ulke">${ülke} (${ülkeKodu})</p>
 		<p>Enlem: ${enlem} Boylam: ${boylam}</p>
 		<p>Şehir: ${şehir}</p>
 		<p>Saat dilimi: ${saatdilimi}</p>
@@ -96,7 +96,7 @@ const bilgiler = (obj) => {
     </div>`;
 };
 
-//new Promise ile yapılış
+//1) new Promise ile yapılış
 // const manuelIp = () => {
 //   return new Promise((resolve, reject) => {
 //     resolve(`https://apis.ergineer.com/ipgeoapi/${benimIP}`);
@@ -115,11 +115,28 @@ const bilgiler = (obj) => {
 //   })
 //   .catch((err) => console.log(err));
 
-//settimeout ile yapılış
-ipAdresimiAl();
-setTimeout(() => {
+//2) settimeout ile yapılış
+// ipAdresimiAl();
+// setTimeout(() => {
+//   console.log(benimIP);
+//   axios
+//     .get(`https://apis.ergineer.com/ipgeoapi/${benimIP}`)
+//     .then((response) => {
+//       document
+//         .querySelector(".cards")
+//         .insertAdjacentHTML("beforeend", bilgiler(response.data));
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }, 1000);
+
+//3) direk fonsiyon ile yapılış
+
+const sonuc = async function () {
+  await ipAdresimiAl(); //bunun çalışmasını bekletmek için await
   console.log(benimIP);
-  axios
+  await axios
     .get(`https://apis.ergineer.com/ipgeoapi/${benimIP}`)
     .then((response) => {
       document
@@ -129,4 +146,6 @@ setTimeout(() => {
     .catch((err) => {
       console.log(err);
     });
-}, 1000);
+};
+
+sonuc();

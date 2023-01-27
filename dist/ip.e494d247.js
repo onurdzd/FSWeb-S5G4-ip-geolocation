@@ -13454,11 +13454,11 @@ function ipAdresimiAl() {
 */
 //kodlar buraya gelecek
 function _ipAdresimiAl() {
-  _ipAdresimiAl = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
+  _ipAdresimiAl = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          _context.next = 2;
+          _context2.next = 2;
           return (0, _axios.default)({
             method: "get",
             url: "https://apis.ergineer.com/ipadresim"
@@ -13469,9 +13469,9 @@ function _ipAdresimiAl() {
           });
         case 2:
         case "end":
-          return _context.stop();
+          return _context2.stop();
       }
-    }, _callee);
+    }, _callee2);
   }));
   return _ipAdresimiAl.apply(this, arguments);
 }
@@ -13486,10 +13486,10 @@ var bilgiler = function bilgiler(obj) {
     saatdilimi = obj.saatdilimi,
     parabirimi = obj.parabirimi,
     isp = obj.isp;
-  return "\n\t<div class=\"card\">\n\t<img src=".concat(ülkebayrağı, " />\n\t<div class=\"card-info\">\n\t\t<h3 class=\"ip\">").concat(sorgu, "</h3>\n\t\t<p class=\"ulke\">").concat(ülke, " ").concat(ülkeKodu, "</p>\n\t\t<p>Enlem: ").concat(enlem, " Boylam: ").concat(boylam, "</p>\n\t\t<p>\u015Eehir: ").concat(şehir, "</p>\n\t\t<p>Saat dilimi: ").concat(saatdilimi, "</p>\n\t\t<p>Para birimi: ").concat(parabirimi, "</p>\n\t\t<p>ISP: ").concat(isp, "</p>\n\t</div>\n    </div>");
+  return "\n\t<div class=\"card\">\n\t<img src=".concat(ülkebayrağı, " />\n\t<div class=\"card-info\">\n\t\t<h3 class=\"ip\">").concat(sorgu, "</h3>\n\t\t<p class=\"ulke\">").concat(ülke, " (").concat(ülkeKodu, ")</p>\n\t\t<p>Enlem: ").concat(enlem, " Boylam: ").concat(boylam, "</p>\n\t\t<p>\u015Eehir: ").concat(şehir, "</p>\n\t\t<p>Saat dilimi: ").concat(saatdilimi, "</p>\n\t\t<p>Para birimi: ").concat(parabirimi, "</p>\n\t\t<p>ISP: ").concat(isp, "</p>\n\t</div>\n    </div>");
 };
 
-//new Promise ile yapılış
+//1) new Promise ile yapılış
 // const manuelIp = () => {
 //   return new Promise((resolve, reject) => {
 //     resolve(`https://apis.ergineer.com/ipgeoapi/${benimIP}`);
@@ -13508,16 +13508,51 @@ var bilgiler = function bilgiler(obj) {
 //   })
 //   .catch((err) => console.log(err));
 
-//settimeout ile yapılış
-ipAdresimiAl();
-setTimeout(function () {
-  console.log(benimIP);
-  _axios.default.get("https://apis.ergineer.com/ipgeoapi/".concat(benimIP)).then(function (response) {
-    document.querySelector(".cards").insertAdjacentHTML("beforeend", bilgiler(response.data));
-  }).catch(function (err) {
-    console.log(err);
-  });
-}, 1000);
+//2) settimeout ile yapılış
+// ipAdresimiAl();
+// setTimeout(() => {
+//   console.log(benimIP);
+//   axios
+//     .get(`https://apis.ergineer.com/ipgeoapi/${benimIP}`)
+//     .then((response) => {
+//       document
+//         .querySelector(".cards")
+//         .insertAdjacentHTML("beforeend", bilgiler(response.data));
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }, 1000);
+
+//3) direk fonsiyon ile yapılış
+
+var sonuc = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.next = 2;
+          return ipAdresimiAl();
+        case 2:
+          //bunun çalışmasını bekletmek için await
+          console.log(benimIP);
+          _context.next = 5;
+          return _axios.default.get("https://apis.ergineer.com/ipgeoapi/".concat(benimIP)).then(function (response) {
+            document.querySelector(".cards").insertAdjacentHTML("beforeend", bilgiler(response.data));
+          }).catch(function (err) {
+            console.log(err);
+          });
+        case 5:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return function sonuc() {
+    return _ref.apply(this, arguments);
+  };
+}();
+sonuc();
 },{"axios":"node_modules/axios/index.js","babel-core/register":"node_modules/babel-core/register.js","babel-polyfill":"node_modules/babel-polyfill/lib/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
