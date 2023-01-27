@@ -13508,7 +13508,7 @@ var bilgiler = function bilgiler(obj) {
 //   })
 //   .catch((err) => console.log(err));
 
-//2) settimeout ile yapılış
+//2) settimeout ile yapılış istenilen sürede gerçekleşmezse kod patlar bu yüzden promise/async+await kullanılıyor
 // ipAdresimiAl();
 // setTimeout(() => {
 //   console.log(benimIP);
@@ -13533,15 +13533,13 @@ var sonuc = /*#__PURE__*/function () {
           _context.next = 2;
           return ipAdresimiAl();
         case 2:
-          //bunun çalışmasını bekletmek için await
-          console.log(benimIP);
-          _context.next = 5;
+          _context.next = 4;
           return _axios.default.get("https://apis.ergineer.com/ipgeoapi/".concat(benimIP)).then(function (response) {
             document.querySelector(".cards").insertAdjacentHTML("beforeend", bilgiler(response.data));
           }).catch(function (err) {
             console.log(err);
           });
-        case 5:
+        case 4:
         case "end":
           return _context.stop();
       }

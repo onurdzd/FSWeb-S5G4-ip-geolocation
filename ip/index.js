@@ -115,7 +115,7 @@ const bilgiler = (obj) => {
 //   })
 //   .catch((err) => console.log(err));
 
-//2) settimeout ile yapılış
+//2) settimeout ile yapılış istenilen sürede gerçekleşmezse kod patlar bu yüzden promise/async+await kullanılıyor
 // ipAdresimiAl();
 // setTimeout(() => {
 //   console.log(benimIP);
@@ -134,7 +134,6 @@ const bilgiler = (obj) => {
 //3) direk fonsiyon ile yapılış
 const sonuc = async () => {
   await ipAdresimiAl(); //bunun çalışmasını bekletmek için await
-  console.log(benimIP);
   await axios
     .get(`https://apis.ergineer.com/ipgeoapi/${benimIP}`)
     .then((response) => {
